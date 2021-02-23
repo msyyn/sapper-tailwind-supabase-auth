@@ -1,6 +1,6 @@
 # sapper-template
 
-The default template for setting up a [Sapper](https://github.com/sveltejs/sapper) project. Can use either Rollup or webpack as bundler.
+Template for quickstarting a [Sapper](https://github.com/sveltejs/sapper) project with TailwindCSS and Supabase.io Auth. Uses Rollup as bundler.
 
 
 ## Getting started
