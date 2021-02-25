@@ -1,21 +1,16 @@
-const production = !process.env.ROLLUP_WATCH;
-const purgecss = require("@fullhuman/postcss-purgecss");
+const tailwind = require('tailwindcss');
 const cssnano = require('cssnano');
+const presetEnv = require('postcss-preset-env')({
+  features: {
+    // enable nesting
+    'nesting-rules': true,
+    'focus-within-pseudo-class': false
+  }, 
+});
 
-module.exports = {
-  plugins: [
-    require("postcss-import")(),
-    require("tailwindcss"),
-    require("autoprefixer"),
-    cssnano({
-      autoprefixer: false,
-      preset: ['default'],
-  }),
-  // Only purge css on production
-  production &&
-    purgecss({
-        content: ["./**/*.html", "./src/**/*.svelte"],
-        defaultExtractor: content => content.match(/[A-Za-z0-9-_:/]+/g || [])
-    })
-  ]
-}
+const plugins =
+  process.env.NODE_ENV === 'production'
+    ? [tailwind, presetEnv, cssnano]
+    : [tailwind, presetEnv];
+
+module.exports = { plugins };
